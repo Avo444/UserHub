@@ -1,0 +1,36 @@
+@use "../../../styles/index.scss" as *;
+.form__wrapper {
+    padding: 50px 0;
+    @include border();
+
+    .form {
+        @include flex(10px, column, center);
+        @include container(700px);
+        border: 1px solid $border;
+        padding: 30px;
+        label {
+            @include flex(10px, column);
+            width: 100%;
+            input,
+            select {
+                @include btn();
+                width: 100%;
+                outline: none;
+                border: none;
+
+                &[type="file"] {
+                    display: none;
+                }
+            }
+            .error {
+                color: $error;
+            }
+        }
+
+        .btn {
+            @include btn("primary");
+            cursor: pointer;
+            margin: auto;
+        }
+    }
+}

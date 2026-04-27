@@ -1,0 +1,12 @@
+@use "../../../styles/index.scss" as *;
+.block {
+    @include flex(15px, column, center, center);
+    padding: 150px 0;
+
+    .title {
+        @include title(64px)
+    }
+    .subtitle {
+        @include title(36px)
+    }
+}

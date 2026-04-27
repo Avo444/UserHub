@@ -1,0 +1,9 @@
+@use "../../../styles/index.scss" as *;
+.item {
+    @include btn();
+}
+:global {
+    .active {
+        @include btn("primary")
+    }
+}

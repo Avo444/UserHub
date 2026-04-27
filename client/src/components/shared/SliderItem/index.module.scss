@@ -1,0 +1,46 @@
+@use "../../../styles/index.scss" as *;
+.item {
+    width: 100%;
+    height: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid $border;
+    .img {
+        width: 100%;
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .content {
+        @include flex(20px, column, center, center);
+        padding: 30px;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        background-color: $bg;
+        transition: $transition;
+        transform: translateY(100%);
+        .title {
+            @include title();
+        }
+        .content__item {
+            span {
+                color: $text-h;
+            }
+        }
+        .btn {
+            @include btn();
+        }
+    }
+
+    &:hover {
+        .content {
+            transform: translateY(0);
+        }
+    }
+}

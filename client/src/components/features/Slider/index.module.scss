@@ -1,0 +1,10 @@
+@use "../../../styles/index.scss" as *;
+.slider {
+    @include border();
+    padding: 40px 0;
+}
+
+.info {
+    @include title();
+    text-align: center;
+}

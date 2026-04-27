@@ -1,0 +1,21 @@
+@use "../../../styles/index.scss" as *;
+nav {
+    @include border();
+    padding: 20px 0;
+
+    .container {
+        @include container();
+
+        .nav__content {
+            @include flex(0, row, space-between, center);
+
+            .logo {
+                @include title();
+            }
+
+            .menu {
+                @include flex();
+            }
+        }
+    }
+}
