@@ -39,7 +39,7 @@ class UserController {
         try {
             const { id } = req.params;
             const { users } = req.app.locals.services;
-            
+
             const file = res.locals.body.file;
             const user = await users.getUserData(id);
 
@@ -47,6 +47,8 @@ class UserController {
 
             if (user.storage === "multer") {
                 filename = await multerUploader(file, filename, user.avatar);
+            } else if (user.storage === "drive") {
+                filename = await driveUploader(file, filename, user.avatar);
             }
 
             const updated = await users.setUserAvatar(id, filename);
