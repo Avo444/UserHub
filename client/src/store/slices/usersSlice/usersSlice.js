@@ -22,6 +22,7 @@ const usersSlice = createSlice({
         
         builder.addCase(updateUserAvatar.fulfilled, (state, action) => {
             state.loader = false;
+            console.log(action.payload)
             state.data = state.data.map((item) =>
                 item._id === action.payload._id ? action.payload : item,
             );
