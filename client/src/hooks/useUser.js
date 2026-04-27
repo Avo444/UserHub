@@ -6,9 +6,10 @@ import { addUserData, getUsersError, updateUserAvatar } from "../store/slices";
 import useNotification from "./useNotification";
 
 const useUser = () => {
+    const { notification, promiseNotification } = useNotification();
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const notification = useNotification();
     const userError = useSelector(getUsersError);
 
     const addUserHandle = async (values) => {
@@ -18,9 +19,12 @@ const useUser = () => {
             Object.entries(values).forEach(([key, value]) =>
                 form.append(key, value),
             );
-
-            const user = await dispatch(addUserData(form)).unwrap();
-            notification(`${user.name} is added successful!`);
+            
+            await promiseNotification(
+                dispatch(addUserData(form)).unwrap(),
+                "Please wait...",
+                `${values.name} is added successful!`,
+            );
             navigate(ROUTES.HOME);
         } catch (error) {
             notification(error, "error");
