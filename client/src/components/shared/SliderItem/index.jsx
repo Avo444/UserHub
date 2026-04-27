@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from "./index.module.scss";
 import { ROUTES } from "../../../constants";
+
+import styles from "./index.module.scss";
 
 const SliderItem = ({ user }) => {
     return (
@@ -10,7 +11,7 @@ const SliderItem = ({ user }) => {
                     src={
                         user.storage === "multer"
                             ? `${import.meta.env.VITE_BACKEND_API}${user.avatar}`
-                            : `https://drive.google.com/thumbnail?id=${user.avatar}&sz=w500`
+                            : `${import.meta.env.VITE_DRIVE_API}${user.avatar}&sz=w500`
                     }
                     alt={user.storage}
                     referrerPolicy="no-referrer"
