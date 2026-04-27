@@ -7,7 +7,7 @@ import useNotification from "./useNotification";
 
 const useUser = () => {
     const { notification, promiseNotification } = useNotification();
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userError = useSelector(getUsersError);
@@ -19,7 +19,7 @@ const useUser = () => {
             Object.entries(values).forEach(([key, value]) =>
                 form.append(key, value),
             );
-            
+
             await promiseNotification(
                 dispatch(addUserData(form)).unwrap(),
                 "Please wait...",
@@ -36,8 +36,11 @@ const useUser = () => {
             const form = new FormData();
             form.append("file", values.file);
 
-            const updated = await dispatch(updateUserAvatar({ form, userID }));
-            notification("Avatar is updated successfull!");
+            await promiseNotification(
+                dispatch(updateUserAvatar({ form, userID })),
+                "Please wait...",
+                `Avatar is changed successful!`,
+            );
         } catch (error) {
             notification(error, "error");
         }
