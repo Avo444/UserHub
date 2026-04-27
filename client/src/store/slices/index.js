@@ -7,7 +7,7 @@ import {
 } from "./usersSlice/usersSlice";
 
 /* ================================ [ API's ] ================================ */
-import { addUserData, getUsersData } from "./usersSlice/api";
+import { addUserData, getUsersData, updateUserAvatar } from "./usersSlice/api";
 
 export {
     // Reducer's
@@ -16,6 +16,7 @@ export {
     // API's
     getUsersData,
     addUserData,
+    updateUserAvatar,
     
     // State's
     getUsers,

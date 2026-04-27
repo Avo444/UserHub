@@ -1,4 +1,4 @@
-import { addUserData, getUsersData } from "./api";
+import { addUserData, getUsersData, updateUserAvatar } from "./api";
 import { createSlice, isPending, isRejected } from "@reduxjs/toolkit";
 
 const usersSlice = createSlice({
@@ -18,6 +18,13 @@ const usersSlice = createSlice({
         builder.addCase(addUserData.fulfilled, (state, action) => {
             state.loader = false;
             state.data = [action.payload, ...state.data];
+        });
+        
+        builder.addCase(updateUserAvatar.fulfilled, (state, action) => {
+            state.loader = false;
+            state.data = state.data.map((item) =>
+                item._id === action.payload._id ? action.payload : item,
+            );
         });
 
         builder.addMatcher(isPending, (state) => {

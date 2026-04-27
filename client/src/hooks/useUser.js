@@ -1,7 +1,7 @@
 import { ROUTES } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addUserData, getUsersError } from "../store/slices";
+import { addUserData, getUsersError, updateUserAvatar } from "../store/slices";
 
 import useNotification from "./useNotification";
 
@@ -23,11 +23,22 @@ const useUser = () => {
             notification(`${user.name} is added successful!`);
             navigate(ROUTES.HOME);
         } catch (error) {
-            console.log(error, "error");
             notification(error, "error");
         }
     };
-    return { addUserHandle };
+
+    const setAvatarHandle = async (values, userID) => {
+        try {
+            const form = new FormData();
+            form.append("file", values.file);
+
+            const updated = await dispatch(updateUserAvatar({ form, userID }));
+            notification("Avatar is updated successfull!");
+        } catch (error) {
+            notification(error, "error");
+        }
+    };
+    return { addUserHandle, setAvatarHandle };
 };
 
 export default useUser;
