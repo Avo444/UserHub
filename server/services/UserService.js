@@ -8,9 +8,22 @@ class UserService {
     }
 
     async addUserData(data) {
-        console.log(data, "data")
         const doc = await this.model.users(data);
         const user = await doc.save();
+        return user;
+    }
+
+    async getUserData(id) {
+        const user = await this.model.users.findById(id);
+        return user;
+    }
+
+    async setUserAvatar(id, avatar) {
+        const user = await this.model.users.findByIdAndUpdate(
+            id,
+            { avatar },
+            { new: true },
+        );
         return user;
     }
 }
