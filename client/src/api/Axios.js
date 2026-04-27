@@ -7,4 +7,5 @@ const instance = axios.create({
 export const Axios = {
     getUsersData: () => instance.get("/api/users"),
     addUserData: (data) => instance.post("/api/users", data),
+    updateUserAvatar: (data) => instance.patch(`/api/users/${data.userID}`, data.form)
 };

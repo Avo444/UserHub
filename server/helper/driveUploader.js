@@ -1,7 +1,7 @@
 const { Readable } = require("stream");
 const { google } = require("googleapis");
 
-const driveUploader = async (file, filename) => {
+const driveUploader = async (file, filename, avatar) => {
     const {
         GOOGLE_CLIENT_ID,
         GOOGLE_CLIENT_SECRET,
@@ -24,7 +24,11 @@ const driveUploader = async (file, filename) => {
         version: "v3",
         auth: oauth2Client,
     });
-
+    if (avatar) {
+        await drive.files.delete({
+            fileId: avatar,
+        });
+    }
     const response = await drive.files.create({
         requestBody: {
             name: filename,
@@ -46,7 +50,7 @@ const driveUploader = async (file, filename) => {
             type: "anyone",
         },
     });
-    return fileId
+    return fileId;
 };
 
 module.exports = driveUploader;

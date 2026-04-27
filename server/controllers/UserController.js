@@ -31,7 +31,30 @@ class UserController {
             const user = await req.app.locals.services.users.addUserData(body);
             sendResponse(res, user);
         } catch (err) {
-            console.log(err);
+            sendResponse(res, err, 500);
+        }
+    }
+
+    async setUserAvatar(req, res) {
+        try {
+            const { id } = req.params;
+            const { users } = req.app.locals.services;
+
+            const file = res.locals.body.file;
+            const user = await users.getUserData(id);
+
+            let filename = imageFormatter(user.name, file.originalname);
+
+            if (user.storage === "multer") {
+                filename = await multerUploader(file, filename, user.avatar);
+            } else if (user.storage === "drive") {
+                filename = await driveUploader(file, filename, user.avatar);
+            }
+
+            const updated = await users.setUserAvatar(id, filename);
+
+            sendResponse(res, updated);
+        } catch (err) {
             sendResponse(res, err, 500);
         }
     }

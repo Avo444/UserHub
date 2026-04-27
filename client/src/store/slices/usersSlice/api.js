@@ -17,3 +17,15 @@ export const addUserData = createAsyncThunk(
         }
     },
 );
+
+export const updateUserAvatar = createAsyncThunk(
+    "users/updateUserAvatar",
+    async (data, { rejectWithValue }) => {
+        try {
+            const response = await Axios.updateUserAvatar(data);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data.error);
+        }
+    },
+);
