@@ -1,6 +1,6 @@
 import { Bounce, toast } from "react-toastify";
 const useNotification = () => {
-    return (notify, type = "success") => {
+    const notification = (notify, type = "success") => {
         toast(notify, {
             type,
             position: "top-right",
@@ -14,6 +14,13 @@ const useNotification = () => {
             transition: Bounce,
         });
     };
+    const promiseNotification = async (promise, pending, success) => {
+        await toast.promise(promise, {
+            pending,
+            success
+        });
+    };
+    return { notification, promiseNotification };
 };
 
 export default useNotification;
